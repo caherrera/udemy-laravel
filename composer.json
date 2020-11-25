@@ -1,26 +1,24 @@
 {
-  "name": "caherrera/shortio-laravel",
-  "description": "shortio-laravel Is A ShortIO Api For Laravel",
+  "name": "caherrera/udemy-laravel",
+  "description": "udemy-laravel Is A Udemy Api Cli For Laravel",
   "license": "MIT",
   "version": "0.2.2",
   "keywords": [
     "laravel",
     "framework",
-    "short.io",
-    "php-shortio-api",
-    "PHP Short.io API",
-    "shortio bridge",
+    "udemy",
+    "php-udemy-api",
+    "PHP udemy.com API",
     "bridge",
-    "Short.io",
-    "Laravel Short.io",
-    "Laravel-Short.io",
+    "udemy",
+    "Laravel udemy",
     "Carlos Herrera",
     "Caherrera"
   ],
   "support": {
-    "docs": "https://github.com/caherrera/shortio-laravel/blob/master/readme.md",
-    "issues": "https://github.com/caherrera/shortio-laravel/issues",
-    "source": "https://github.com/caherrera/shortio-laravel"
+    "docs": "https://github.com/caherrera/udemy-laravel/blob/master/readme.md",
+    "issues": "https://github.com/caherrera/udemy-laravel/issues",
+    "source": "https://github.com/caherrera/udemy-laravel"
   },
   "authors": [
     {
