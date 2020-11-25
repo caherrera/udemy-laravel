@@ -1,0 +1,62 @@
+{
+  "name": "caherrera/shortio-laravel",
+  "description": "shortio-laravel Is A ShortIO Api For Laravel",
+  "license": "MIT",
+  "version": "0.2.2",
+  "keywords": [
+    "laravel",
+    "framework",
+    "short.io",
+    "php-shortio-api",
+    "PHP Short.io API",
+    "shortio bridge",
+    "bridge",
+    "Short.io",
+    "Laravel Short.io",
+    "Laravel-Short.io",
+    "Carlos Herrera",
+    "Caherrera"
+  ],
+  "support": {
+    "docs": "https://github.com/caherrera/shortio-laravel/blob/master/readme.md",
+    "issues": "https://github.com/caherrera/shortio-laravel/issues",
+    "source": "https://github.com/caherrera/shortio-laravel"
+  },
+  "authors": [
+    {
+      "name": "Carlos Herrera",
+      "email": "caherrera@gmail.com"
+    }
+  ],
+  "require": {
+    "ext-json": "*",
+    "illuminate/contracts": "^7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Shortio\\Laravel\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Shortio\\Laravel\\Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "preferred-install": "dist"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Shortio\\Laravel\\ShortioServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require-dev": {
+    "mockery/mockery": "^1.4",
+    "phpunit/phpunit": "^9.2",
+    "orchestra/testbench": "^5.3"
+  }
+}
