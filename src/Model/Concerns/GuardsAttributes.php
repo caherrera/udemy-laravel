@@ -1,6 +1,6 @@
 <?php
 
-namespace Shortio\Laravel\Model\Concerns;
+namespace Udemy\Laravel\Model\Concerns;
 
 use Illuminate\Database\Eloquent\Concerns\GuardsAttributes as Illuminate;
 

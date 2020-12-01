@@ -1,13 +1,12 @@
 <?php
 
 
-namespace Shortio\Laravel\Api;
+namespace Udemy\Laravel\Api;
 
-use Shortio\Laravel\ConnectionInterface;
+use Udemy\Laravel\ConnectionInterface;
 
 interface ApiInterface
 {
-
 
     public function prepareBaseUrl($url = null);
 

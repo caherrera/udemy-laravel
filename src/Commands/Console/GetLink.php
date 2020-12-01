@@ -1,9 +1,9 @@
 <?php
 
-namespace Shortio\Laravel\Commands\Console;
+namespace Udemy\Laravel\Commands\Console;
 
 use Illuminate\Console\Command;
-use Shortio\Laravel\Model\Link;
+use Udemy\Laravel\Model\Link;
 
 class GetLink extends Command
 {
@@ -12,7 +12,7 @@ class GetLink extends Command
      *
      * @var string
      */
-    protected $signature = 'shortio:getlink
+    protected $signature = 'Udemy:getlink
         {id}
     ';
 

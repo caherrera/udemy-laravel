@@ -1,6 +1,6 @@
 <?php
 
-namespace Shortio\Laravel\Model\Exceptions;
+namespace Udemy\Laravel\Model\Exceptions;
 
 use RuntimeException;
 

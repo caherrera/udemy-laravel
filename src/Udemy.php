@@ -1,12 +1,11 @@
 <?php
 
-namespace Shortio\Laravel;
+namespace Udemy\Laravel;
 
-use Shortio\Laravel\Api\Domain;
-use Shortio\Laravel\Api\Link;
+use Udemy\Laravel\Api\Domain;
+use Udemy\Laravel\Api\Link;
 
-
-class Shortio implements ConnectionInterface
+class Udemy implements ConnectionInterface
 {
     const HEADER_APIKEY = 'authorization';
     protected $links;
@@ -90,7 +89,7 @@ class Shortio implements ConnectionInterface
     /**
      * @param  string  $privKey
      *
-     * @return Shortio
+     * @return Udemy
      */
     public function setPrivKey($privKey)
     {
@@ -110,7 +109,7 @@ class Shortio implements ConnectionInterface
     /**
      * @param  mixed  $pubKey
      *
-     * @return Shortio
+     * @return Udemy
      */
     public function setPubKey($pubKey)
     {
@@ -160,7 +159,7 @@ class Shortio implements ConnectionInterface
     /**
      * @param  array|int|string  $config
      *
-     * @return Shortio
+     * @return Udemy
      */
     public function setConfig(array $config = [])
     {

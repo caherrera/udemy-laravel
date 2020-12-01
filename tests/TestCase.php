@@ -1,10 +1,10 @@
 <?php
 
-namespace Shortio\Laravel\Tests;
+namespace Udemy\Laravel\Tests;
 
 use Orchestra\Testbench\Concerns\CreatesApplication;
 use Orchestra\Testbench\TestCase as BaseTestCase;
-use Shortio\Laravel\ShortioServiceProvider;
+use Udemy\Laravel\UdemyServiceProvider;
 
 class TestCase extends BaseTestCase
 {
@@ -13,7 +13,7 @@ class TestCase extends BaseTestCase
     protected function getPackageProviders($app)
     {
         return [
-            ShortioServiceProvider::class,
+            UdemyServiceProvider::class,
         ];
     }
 
@@ -37,6 +37,4 @@ class TestCase extends BaseTestCase
             ]
         );
     }
-
-
 }

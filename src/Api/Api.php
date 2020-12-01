@@ -1,19 +1,17 @@
 <?php
 
-
-namespace Shortio\Laravel\Api;
+namespace Udemy\Laravel\Api;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
-use Shortio\Laravel\ConnectionInterface;
-
+use Udemy\Laravel\ConnectionInterface;
 
 /**
  * Class Api
  *
- * @package Shortio\Laravel\Api
+ * @package Udemy\Laravel\Api
  */
 abstract class Api implements ApiInterface
 {
@@ -129,7 +127,6 @@ abstract class Api implements ApiInterface
     public function setConnector(ConnectionInterface $connector)
     {
         $this->connector = $connector;
-
 
         return $this;
     }
@@ -330,7 +327,7 @@ abstract class Api implements ApiInterface
     {
         $ref  = Str::lower($this->className());
         $name = Str::lower($name);
-        $url  = config("shortio.endpoints.$ref.$name.endpoint");
+        $url  = config("Udemy.endpoints.$ref.$name.endpoint");
         $url  = $this->getPath($url, $id);
 
         return $url;
@@ -358,5 +355,4 @@ abstract class Api implements ApiInterface
     {
         return $this->queryString[$key] = $value;
     }
-
 }

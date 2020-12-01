@@ -1,18 +1,17 @@
 <?php
 
-namespace Shortio\Laravel;
+namespace Udemy\Laravel;
 
 use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
-use Shortio\Laravel\Commands\Console\Create;
-use Shortio\Laravel\Commands\Console\GetLink;
-use Shortio\Laravel\Commands\Console\Links;
+use Udemy\Laravel\Commands\Console\Create;
+use Udemy\Laravel\Commands\Console\GetLink;
+use Udemy\Laravel\Commands\Console\Links;
 
-class ShortioServiceProvider extends ServiceProvider
+class UdemyServiceProvider extends ServiceProvider
 {
-
     /**
      * Run service provider boot operations.
      *
@@ -29,7 +28,7 @@ class ShortioServiceProvider extends ServiceProvider
 
             $this->publishes(
                 [
-                    $config => config_path('shortio.php'),
+                    $config => config_path('Udemy.php'),
                 ]
             );
             $this->commands([Create::class,Links::class,GetLink::class]);
@@ -56,18 +55,18 @@ class ShortioServiceProvider extends ServiceProvider
         // Bind the contract to the object
         // in the IoC for dependency injection.
         $this->app->singleton(
-            'shortio',
+            'Udemy',
             function (Container $app) {
-                $config = $app->make('config')->get('shortio');
+                $config = $app->make('config')->get('Udemy');
 
                 // Verify configuration exists.
                 if (is_null($config)) {
-                    $message = 'ShortIO configuration could not be found. Try re-publishing using `php artisan vendor:publish`.';
+                    $message = 'Udemy configuration could not be found. Try re-publishing using `php artisan vendor:publish`.';
 
                     throw new \RuntimeException($message);
                 }
 
-                return new Shortio($config);
+                return new Udemy($config);
             }
         );
     }
@@ -79,7 +78,7 @@ class ShortioServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['shortio'];
+        return ['Udemy'];
     }
 
     /**
@@ -89,6 +88,6 @@ class ShortioServiceProvider extends ServiceProvider
      */
     protected function isLogging()
     {
-        return Config::get('shortio.logging', false);
+        return Config::get('Udemy.logging', false);
     }
 }

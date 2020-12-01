@@ -1,6 +1,6 @@
 <?php
 
-namespace Shortio\Laravel\Model\Concerns;
+namespace Udemy\Laravel\Model\Concerns;
 
 use Illuminate\Database\Eloquent\Concerns\HasAttributes as Illuminate;
 use Illuminate\Support\Str;
@@ -8,7 +8,6 @@ use Illuminate\Support\Str;
 trait HasAttributes
 {
     use Illuminate;
-
 
     /**
      * Indicates if the model should be timestamped.

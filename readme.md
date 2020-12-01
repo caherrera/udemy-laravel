@@ -1,14 +1,14 @@
-Laravel Shortio
+Laravel Udemy
 ==============
 
-Laravel Shortio was created by, and is maintained by [Carlos Herrera](https://github.com/caherrera), and is a [PHP API Client for Short.io](https://short.io) bridge for [Laravel](http://laravel.com). Feel free to check out the [change log](CHANGELOG.md), [releases](https://github.com/caherrera/shortio-laravel/releases), [security policy](https://github.com/caherrera/shortio-laravel/security/policy), [license](LICENSE), [code of conduct](.github/CODE_OF_CONDUCT.md), and [contribution guidelines](.github/CONTRIBUTING.md).
+Laravel Udemy was created by, and is maintained by [Carlos Herrera](https://github.com/caherrera), and is a [PHP API Client for Short.io](https://short.io) bridge for [Laravel](http://laravel.com). Feel free to check out the [change log](CHANGELOG.md), [releases](https://github.com/caherrera/Udemy-laravel/releases), [security policy](https://github.com/caherrera/Udemy-laravel/security/policy), [license](LICENSE), [code of conduct](.github/CODE_OF_CONDUCT.md), and [contribution guidelines](.github/CONTRIBUTING.md).
 
 <p align="center">
-<a href="https://github.com/caherrera/shortio-laravel/actions?query=workflow%3ATests"><img src="https://img.shields.io/github/workflow/status/caherrera/shortio-laravel/Tests?label=Tests&style=flat-square" alt="Build Status"></img></a>
+<a href="https://github.com/caherrera/Udemy-laravel/actions?query=workflow%3ATests"><img src="https://img.shields.io/github/workflow/status/caherrera/Udemy-laravel/Tests?label=Tests&style=flat-square" alt="Build Status"></img></a>
 <a href="https://github.styleci.io/repos/279953049?branch=master"><img src="https://github.styleci.io/repos/279953049/shield?branch=master" alt="StyleCI"></a>
 <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-brightgreen?style=flat-square" alt="Software License"></img></a>
-<a href="https://packagist.org/packages/caherrera/shortio-laravel"><img alt="Packagist Downloads" src="https://img.shields.io/packagist/dt/caherrera/shortio-laravel"></a>
-<a href="https://packagist.org/packages/caherrera/shortio-laravel"><img alt="Packagist Version" src="https://img.shields.io/packagist/v/caherrera/shortio-laravel"></a>
+<a href="https://packagist.org/packages/caherrera/Udemy-laravel"><img alt="Packagist Downloads" src="https://img.shields.io/packagist/dt/caherrera/Udemy-laravel"></a>
+<a href="https://packagist.org/packages/caherrera/Udemy-laravel"><img alt="Packagist Version" src="https://img.shields.io/packagist/v/caherrera/Udemy-laravel"></a>
 </p>
 
 
@@ -19,15 +19,15 @@ Laravel GitLab requires [PHP](https://php.net) 7.2-7.4. This particular version 
 To get the latest version, simply require the project using [Composer](https://getcomposer.org). 
 
 ```bash
-$ composer require caherrera/shortio-laravel
+$ composer require caherrera/Udemy-laravel
 ```
 
-Once installed, if you are not using automatic package discovery, then you need to register the `Shortio\Laravel\ShortioServiceProvider` service provider in your `config/app.php`.
+Once installed, if you are not using automatic package discovery, then you need to register the `Udemy\Laravel\UdemyServiceProvider` service provider in your `config/app.php`.
 
 You can also optionally alias our facade:
 
 ```php
-        'Shortio'      => Shortio\Laravel\Facades\Shortio::class,
+        'Udemy'      => Udemy\Laravel\Facades\Udemy::class,
 ```
 
 
@@ -41,24 +41,24 @@ To get started, you'll need to publish all vendor assets:
 $ php artisan vendor:publish
 ```
 
-This will create a `config/shortio.php` file in your app that you can modify to set your configuration. Also, make sure you check for changes to the original config file in this package between releases.
+This will create a `config/Udemy.php` file in your app that you can modify to set your configuration. Also, make sure you check for changes to the original config file in this package between releases.
 
 ##### Real Examples
 
 Here you can see an example of just how simple this package is to use. Out of the box, the default adapter is `main`. After you enter your authentication details in the config file, it will just work:
 
 ```php
-use Shortio\Laravel\Facades\Shortio;
+use Udemy\Laravel\Facades\Udemy;
 // you can alias this in config/app.php if you like
 
-shortio::domains()->all();
+Udemy::domains()->all();
 // we're done here - how easy was that, it just works!
 ```
 
 If you prefer to use models over facades like me, then you can easily inject the manager like so:
 
 ```php
-use Shortio\Laravel\Model\Link;
+use Udemy\Laravel\Model\Link;
 
 class Foo
 {
@@ -84,7 +84,7 @@ There are other classes in this package that are not documented here. This is be
 
 ## Security
 
-If you discover a security vulnerability within this package, please rise an issue. All security vulnerabilities will be promptly addressed. You may view our full security policy [here](https://github.com/caherrera/shortio-laravel/security/policy).
+If you discover a security vulnerability within this package, please rise an issue. All security vulnerabilities will be promptly addressed. You may view our full security policy [here](https://github.com/caherrera/Udemy-laravel/security/policy).
 
 
 ## License
