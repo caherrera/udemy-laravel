@@ -1,6 +1,6 @@
 <?php
 
-namespace Shortio\Laravel\Api;
+namespace Udemy\Laravel\Api;
 
 class Domain extends Api
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Shortio\Laravel\Commands\Console;
+namespace Udemy\Laravel\Commands\Console;
 
 use Illuminate\Console\Command;
-use Shortio\Laravel\Model\Link;
+use Udemy\Laravel\Model\Link;
 
 class Links extends Command
 {
@@ -12,7 +12,7 @@ class Links extends Command
      *
      * @var string
      */
-    protected $signature = 'shortio:links
+    protected $signature = 'Udemy:links
         {--domain : example \'mydomain.com\'}
         {--originalURL : example "https://google.com"}
         {--path= : Set path value to new link }
@@ -22,7 +22,6 @@ class Links extends Command
         {--cloaking= : Set cloaking value to new link }
         {--source= : Set source value to new link }
         {--AutodeletedAt= : Set AutodeletedAt value to new link }
-
     ';
 
     /**

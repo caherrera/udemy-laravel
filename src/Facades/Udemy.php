@@ -1,26 +1,23 @@
 <?php
 
-
-namespace Shortio\Laravel\Facades;
-
+namespace Udemy\Laravel\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Shortio\Laravel\Api\Domain;
-
+use Udemy\Laravel\Api\Domain;
 
 /**
- * Class Shortio
+ * Class Udemy
  *
- * @package Shortio\Laravel\Facades
+ * @package Udemy\Laravel\Facades
  * @method Domain domains();
  */
-class Shortio extends Facade
+class Udemy extends Facade
 {
     /**
      * {@inheritdoc}
      */
     protected static function getFacadeAccessor()
     {
-        return 'shortio';
+        return 'Udemy';
     }
 }

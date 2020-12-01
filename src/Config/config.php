@@ -11,7 +11,7 @@ return [
     |
     */
 
-    'api' => env('SHORTIO_API', 'api.short.cm'),
+    'api' => env('Udemy_API', 'api.short.cm'),
 
     /*
     |--------------------------------------------------------------------------
@@ -24,18 +24,18 @@ return [
 
     'endpoints' => [
         'domain' => [
-            'get'    => ['method' => 'POST', 'endpoint' => env('SHORTIO_PATH_DOMAIN_GET', 'api/domains')],
-            'list'   => ['method' => 'POST', 'endpoint' => env('SHORTIO_PATH_DOMAIN_LIST', 'api/domains')],
-            'create' => ['method' => 'POST', 'endpoint' => env('SHORTIO_PATH_DOMAIN_CREATE', 'domains')],
-            'update' => ['method' => 'POST', 'endpoint' => env('SHORTIO_PATH_DOMAIN_UPDATE', 'domains/settings')],
-            'delete' => ['method' => 'POST', 'endpoint' => env('SHORTIO_PATH_DOMAIN_DELETE', 'domains/delete')],
+            'get'    => ['method' => 'POST', 'endpoint' => env('Udemy_PATH_DOMAIN_GET', 'api/domains')],
+            'list'   => ['method' => 'POST', 'endpoint' => env('Udemy_PATH_DOMAIN_LIST', 'api/domains')],
+            'create' => ['method' => 'POST', 'endpoint' => env('Udemy_PATH_DOMAIN_CREATE', 'domains')],
+            'update' => ['method' => 'POST', 'endpoint' => env('Udemy_PATH_DOMAIN_UPDATE', 'domains/settings')],
+            'delete' => ['method' => 'POST', 'endpoint' => env('Udemy_PATH_DOMAIN_DELETE', 'domains/delete')],
         ],
         'link'   => [
-            'get'    => ['method' => 'GET', 'endpoint' => env('SHORTIO_PATH_LINKS_GET', 'api/links')],
-            'list'   => ['method' => 'GET', 'endpoint' => env('SHORTIO_PATH_LINKS_LIST', 'api/links')],
-            'create' => ['method' => 'POST', 'endpoint' => env('SHORTIO_PATH_LINKS_CREATE', 'links')],
-            'update' => ['method' => 'POST', 'endpoint' => env('SHORTIO_PATH_LINKS_UPDATE', 'links/{ID}')],
-            'delete' => ['method' => 'DELETE', 'endpoint' => env('SHORTIO_PATH_LINKS_DELETE', 'links')],
+            'get'    => ['method' => 'GET', 'endpoint' => env('Udemy_PATH_LINKS_GET', 'api/links')],
+            'list'   => ['method' => 'GET', 'endpoint' => env('Udemy_PATH_LINKS_LIST', 'api/links')],
+            'create' => ['method' => 'POST', 'endpoint' => env('Udemy_PATH_LINKS_CREATE', 'links')],
+            'update' => ['method' => 'POST', 'endpoint' => env('Udemy_PATH_LINKS_UPDATE', 'links/{ID}')],
+            'delete' => ['method' => 'DELETE', 'endpoint' => env('Udemy_PATH_LINKS_DELETE', 'links')],
         ]
     ],
 
@@ -48,7 +48,7 @@ return [
     |
     */
 
-    'secure'  => env('SHORTIO_SECURE', true),
+    'secure'  => env('Udemy_SECURE', true),
 
 
     /*
@@ -61,7 +61,7 @@ return [
     | and JavaScript webpages and iPhone/Android apps.
     |
     */
-    'secret'  => env('SHORTIO_KEY', null),
+    'secret'  => env('Udemy_KEY', null),
 
     /*
     |--------------------------------------------------------------------------
@@ -75,7 +75,7 @@ return [
     | you expect this behavior.
     |
     */
-    'public'  => env('SHORTIO_PUBKEY', null),
+    'public'  => env('Udemy_PUBKEY', null),
 
     /*
     |--------------------------------------------------------------------------
@@ -85,7 +85,7 @@ return [
     | Any Extra Headers
     |
     */
-    'headers' => env('SHORTIO_HEADERS', []),
+    'headers' => env('Udemy_HEADERS', []),
 
     /*
     |--------------------------------------------------------------------------
@@ -96,7 +96,7 @@ return [
     |
     */
     'cache'   => [
-        'timeout' => env('SHORTIO_CACHE_TIMEOUT', 3600),
+        'timeout' => env('Udemy_CACHE_TIMEOUT', 3600),
     ]
 
 ];

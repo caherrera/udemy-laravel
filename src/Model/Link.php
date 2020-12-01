@@ -1,16 +1,15 @@
 <?php
 
-namespace Shortio\Laravel\Model;
+namespace Udemy\Laravel\Model;
 
 use Illuminate\Support\Facades\Cache;
-use Shortio\Laravel\Api\ApiInterface;
-use Shortio\Laravel\Api\Link as Api;
-
+use Udemy\Laravel\Api\ApiInterface;
+use Udemy\Laravel\Api\Link as Api;
 
 /**
  * Class Link
  *
- * @package Shortio\Laravel\Model
+ * @package Udemy\Laravel\Model
  *
  * @property string path
  * @property string title
@@ -43,7 +42,7 @@ class Link extends Model
 //        return static::findByDomainAndPath($model->domain->hostname, $model->slug);
         return static::all()->filter(
             function ($link) use ($model) {
-                return $link->id = $model->shortio_id;
+                return $link->id = $model->Udemy_id;
             }
         )->first();
     }
@@ -54,7 +53,7 @@ class Link extends Model
 
         return Cache::remember(
             static::class.'@all',
-            config("shortio.cache.timeout"),
+            config("Udemy.cache.timeout"),
             function () use ($instance) {
                 $domains = Domain::all();
                 $links   = collect();
@@ -91,7 +90,6 @@ class Link extends Model
 //            return collect();
 //        }
     }
-
 
     public function domain()
     {
@@ -144,5 +142,4 @@ class Link extends Model
 
         return true;
     }
-
 }

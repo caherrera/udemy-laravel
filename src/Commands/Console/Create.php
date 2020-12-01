@@ -1,9 +1,9 @@
 <?php
 
-namespace Shortio\Laravel\Commands\Console;
+namespace Udemy\Laravel\Commands\Console;
 
 use Illuminate\Console\Command;
-use Shortio\Laravel\Model\Link;
+use Udemy\Laravel\Model\Link;
 
 class Create extends Command
 {
@@ -12,10 +12,10 @@ class Create extends Command
      *
      * @var string
      */
-    protected $signature = 'shortio:create 
-        {domain : example \'mydomain.com\'} 
+    protected $signature = 'Udemy:create
+        {domain : example \'mydomain.com\'}
         {originalURL : example "https://google.com"}
-        
+
         {--path= : Set path value to new link }
         {--title= : Set title value to new link }
         {--icon= : Set icon value to new link }
@@ -29,7 +29,6 @@ class Create extends Command
         {--cloaking= : Set cloaking value to new link }
         {--source= : Set source value to new link }
         {--AutodeletedAt= : Set AutodeletedAt value to new link }
-        
     ';
 
     /**

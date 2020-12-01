@@ -1,6 +1,6 @@
 <?php
 
-namespace Shortio\Laravel;
+namespace Udemy\Laravel;
 
 interface ConnectionInterface
 {

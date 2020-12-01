@@ -10,7 +10,7 @@
          stopOnFailure="false"
         >
     <testsuites>
-        <testsuite name="ShortIO Test Suite">
+        <testsuite name="Udemy Test Suite">
             <directory suffix="Test.php">./tests/</directory>
         </testsuite>
     </testsuites>

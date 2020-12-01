@@ -1,6 +1,6 @@
 <?php
 
-namespace Shortio\Laravel\Model\Concerns;
+namespace Udemy\Laravel\Model\Concerns;
 
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Events\NullDispatcher;
@@ -9,7 +9,7 @@ use InvalidArgumentException;
 
 trait HasEvents
 {
-    static $EVENT_PREFIX = 'shortio';
+    static $EVENT_PREFIX = 'Udemy';
     /**
      * The event map for the model.
      *

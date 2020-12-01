@@ -1,19 +1,19 @@
 <?php
 
-namespace Shortio\Laravel\Model;
+namespace Udemy\Laravel\Model;
 
 use ArrayAccess;
 use Illuminate\Support\Collection as BaseCollection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use JsonSerializable;
-use Shortio\Laravel\Api\ApiInterface;
-use Shortio\Laravel\Facades\Shortio;
-use Shortio\Laravel\Model\Concerns\GuardsAttributes;
-use Shortio\Laravel\Model\Concerns\HasAttributes;
-use Shortio\Laravel\Model\Concerns\HasEvents;
-use Shortio\Laravel\Model\Concerns\HidesAttributes;
-use Shortio\Laravel\Model\Exceptions\MassAssignmentException;
+use Udemy\Laravel\Api\ApiInterface;
+use Udemy\Laravel\Facades\Udemy;
+use Udemy\Laravel\Model\Concerns\GuardsAttributes;
+use Udemy\Laravel\Model\Concerns\HasAttributes;
+use Udemy\Laravel\Model\Concerns\HasEvents;
+use Udemy\Laravel\Model\Concerns\HidesAttributes;
+use Udemy\Laravel\Model\Exceptions\MassAssignmentException;
 
 
 abstract class Model implements ArrayAccess, JsonSerializable
@@ -295,7 +295,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
     public function prepareApi()
     {
         $method   = Str::snake(Str::pluralStudly(class_basename($this)));
-        $ApiClass = Shortio::$method();
+        $ApiClass = Udemy::$method();
 
         return $ApiClass;
     }
@@ -315,7 +315,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
 
         return Cache::remember(
             static::class.'@all',
-            config("shortio.cache.timeout"),
+            config("Udemy.cache.timeout"),
             function () use ($i) {
                 return $i->hydrate(
                     $i->getApi()->all()
@@ -791,7 +791,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
 
         return Cache::remember(
             $cache_key,
-            config('shortio.cache.timeout'),
+            config('Udemy.cache.timeout'),
             function () use ($api, $path) {
                 return $api->get($path);
             }

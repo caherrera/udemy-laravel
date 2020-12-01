@@ -32,12 +32,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Shortio\\Laravel\\": "src/"
+      "Udemy\\Laravel\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Shortio\\Laravel\\Tests\\": "tests/"
+      "Udemy\\Laravel\\Tests\\": "tests/"
     }
   },
   "config": {
@@ -46,7 +46,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Shortio\\Laravel\\ShortioServiceProvider"
+        "Udemy\\Laravel\\UdemyServiceProvider"
       ]
     }
   },
