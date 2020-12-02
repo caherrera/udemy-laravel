@@ -77,7 +77,7 @@ class Udemy implements ConnectionInterface
      */
     public function prepareAuthorization()
     {
-        return $this->getClient() ?? $this->getSecret();
+        return 'Basic '.base64_encode($this->getClient() .':'. $this->getSecret());
     }
 
     /**
