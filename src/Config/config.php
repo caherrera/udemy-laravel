@@ -12,8 +12,8 @@ return [
     */
 
     'organization' =>[
-        'domain' => env('ORGANIZATION_DOMAIN', ''),
-        'id' => env('ORGANIZATION_ID', '')
+        'domain' => env('UDEMY_ORGANIZATION_DOMAIN', ''),
+        'id' => env('UDEMY_ORGANIZATION_ID', '')
     ],
 
     /*
