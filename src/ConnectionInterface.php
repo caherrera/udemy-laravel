@@ -11,9 +11,9 @@ interface ConnectionInterface
 
     public function getConfig($config = null);
 
-    public function getPubKey(): string;
+    public function getSecret(): string;
 
-    public function setPubKey(string $pub);
+    public function setSecret(string $pub);
 
     public function initialize(array $config = []);
 

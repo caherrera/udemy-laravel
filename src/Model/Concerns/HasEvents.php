@@ -2,14 +2,14 @@
 
 namespace Udemy\Laravel\Model\Concerns;
 
-use Illuminate\Contracts\Events\Dispatcher;
-use Illuminate\Events\NullDispatcher;
 use Illuminate\Support\Arr;
 use InvalidArgumentException;
+use Illuminate\Events\NullDispatcher;
+use Illuminate\Contracts\Events\Dispatcher;
 
 trait HasEvents
 {
-    static $EVENT_PREFIX = 'Udemy';
+    static $EVENT_PREFIX = 'udemy';
     /**
      * The event map for the model.
      *
@@ -20,7 +20,7 @@ trait HasEvents
     protected $dispatchesEvents = [];
 
     /**
-     * User exposed observable events.
+     * UserCourseActivity exposed observable events.
      *
      * These are extra user-defined events observers may subscribe to.
      *

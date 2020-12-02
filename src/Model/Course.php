@@ -2,12 +2,12 @@
 
 namespace Udemy\Laravel\Model;
 
-use Illuminate\Support\Facades\Cache;
 use Udemy\Laravel\Api\ApiInterface;
-use Udemy\Laravel\Api\Link as Api;
+use Udemy\Laravel\Api\Course as Api;
+use Illuminate\Support\Facades\Cache;
 
 /**
- * Class Link
+ * Class Course
  *
  * @package Udemy\Laravel\Model
  *
@@ -32,7 +32,7 @@ use Udemy\Laravel\Api\Link as Api;
  * @property-read string secureShortURL
  * @property-read string shortURL
  */
-class Link extends Model
+class Course extends Model
 {
 
     protected $fillable = Api::properties;
@@ -82,64 +82,16 @@ class Link extends Model
                 return $link->path === $path && $domain === $link->domain->hostname;
             }
         );
-//        $instance = (new static)->newInstance();
-//        $instance->where("domain", $domain)->where('path', $path);
-//        if ($items = $instance->get('expand')) {
-//            return $instance->hydrate($items->all());
-//        } else {
-//            return collect();
-//        }
     }
 
-    public function domain()
+    public function course()
     {
-        if ( ! $this->domain) {
-            if ($this->DomainId) {
-                return $this->domain = Domain::find($this->DomainId);
+        if ( ! $this->course) {
+            if ($this->CourseId) {
+                return $this->course = Course::find($this->CourseId);
             }
         }
 
-        return $this->domain;
-    }
-
-    /**
-     * Perform a model insert operation.
-     *
-     * @return bool
-     */
-    protected function performInsert(ApiInterface $api)
-    {
-        if ($this->fireModelEvent('creating') === false) {
-            return false;
-        }
-
-        $attributes = collect($this->getAttributes())->filter(
-            function ($v) {
-                return ! empty($v);
-            }
-        )->all();
-        if (isset($attributes['DomainId'])) {
-            $attributes['domain'] = Domain::find($attributes['DomainId'])->hostname;
-            unset($attributes['DomainId']);
-        }
-
-        if (empty($attributes)) {
-            return true;
-        }
-
-        $data = $api->save($attributes);
-        $this->fill($data);
-        $this->id = $data['id'];
-
-        // We will go ahead and set the exists property to true, so that it is set when
-        // the created event is fired, just in case the developer tries to update it
-        // during the event. This will allow them to do so and run an update here.
-        $this->exists = true;
-
-        $this->wasRecentlyCreated = true;
-
-        $this->fireModelEvent('created', false);
-
-        return true;
+        return $this->course;
     }
 }

@@ -2,14 +2,16 @@
 
 namespace Udemy\Laravel;
 
-use Udemy\Laravel\Api\Domain;
-use Udemy\Laravel\Api\Link;
+use Udemy\Laravel\Api\Course;
+use Udemy\Laravel\Api\UserActivity;
+use Udemy\Laravel\Api\UserCourseActivity;
 
 class Udemy implements ConnectionInterface
 {
     const HEADER_APIKEY = 'authorization';
-    protected $links;
-    protected $domains;
+    protected $course;
+    protected $useractivity;
+    protected $usercourseactivy;
     /**
      * @var array
      */
@@ -17,12 +19,12 @@ class Udemy implements ConnectionInterface
     /**
      * @var string
      */
-    private $privKey;
+    private $client;
 
     /**
      * @var string
      */
-    private $pubKey;
+    private $secret;
     /**
      * @var array
      */
@@ -39,10 +41,10 @@ class Udemy implements ConnectionInterface
              ->setHeaders($config['headers']);
 
         if ($config['secret']) {
-            $this->setPrivKey($config['secret']);
+            $this->setSecret($config['secret']);
         }
-        if ($config['public']) {
-            $this->setPubKey($config['public']);
+        if ($config['client']) {
+            $this->setClient($config['client']);
         }
 
         $this->setAuthorization($this->prepareAuthorization());
@@ -75,25 +77,25 @@ class Udemy implements ConnectionInterface
      */
     public function prepareAuthorization()
     {
-        return $this->getPrivKey() ?? $this->getPubKey();
+        return $this->getClient() ?? $this->getSecret();
     }
 
     /**
      * @return string
      */
-    public function getPrivKey()
+    public function getClient()
     {
-        return $this->privKey;
+        return $this->client;
     }
 
     /**
-     * @param  string  $privKey
+     * @param  string  $client
      *
      * @return Udemy
      */
-    public function setPrivKey($privKey)
+    public function setClient($client)
     {
-        $this->privKey = $privKey;
+        $this->client = $client;
 
         return $this;
     }
@@ -101,19 +103,19 @@ class Udemy implements ConnectionInterface
     /**
      * @return mixed
      */
-    public function getPubKey(): string
+    public function getSecret(): string
     {
-        return $this->pubKey;
+        return $this->secret;
     }
 
     /**
-     * @param  mixed  $pubKey
+     * @param  mixed  $secret
      *
      * @return Udemy
      */
-    public function setPubKey($pubKey)
+    public function setSecret($secret)
     {
-        $this->pubKey = $pubKey;
+        $this->secret = $secret;
 
         return $this;
     }
@@ -128,27 +130,39 @@ class Udemy implements ConnectionInterface
     }
 
     /**
-     * @return Link
+     * @return Course
      */
-    public function links()
+    public function courses()
     {
-        if ($this->links === null) {
-            $this->links = new Link($this);
+        if ($this->courses === null) {
+            $this->courses = new Course($this);
         }
 
-        return $this->links;
+        return $this->courses;
     }
 
     /**
-     * @return Domain
+     * @return UserActivity
      */
-    public function domains()
+    public function userActivities()
     {
-        if ($this->domains === null) {
-            $this->domains = new Domain($this);
+        if ($this->userActivities === null) {
+            $this->userActivities = new UserActivity($this);
         }
 
-        return $this->domains;
+        return $this->userActivities;
+    }
+
+    /**
+     * @return UserCourseActivity
+     */
+    public function userCourseActivities()
+    {
+        if ($this->userCourseActivities === null) {
+            $this->userCourseActivities = new UserCourseActivity($this);
+        }
+
+        return $this->userCourseActivities;
     }
 
     public function getConfig($config = null)
