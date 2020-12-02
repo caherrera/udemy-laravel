@@ -6,9 +6,6 @@ use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
-use Udemy\Laravel\Commands\Console\Create;
-use Udemy\Laravel\Commands\Console\GetLink;
-use Udemy\Laravel\Commands\Console\Links;
 
 class UdemyServiceProvider extends ServiceProvider
 {
@@ -28,10 +25,10 @@ class UdemyServiceProvider extends ServiceProvider
 
             $this->publishes(
                 [
-                    $config => config_path('Udemy.php'),
+                    $config => config_path('udemy.php'),
                 ]
             );
-            $this->commands([Create::class,Links::class,GetLink::class]);
+           // $this->commands([Create::class,Links::class,GetLink::class]);
         }
     }
 
@@ -55,9 +52,9 @@ class UdemyServiceProvider extends ServiceProvider
         // Bind the contract to the object
         // in the IoC for dependency injection.
         $this->app->singleton(
-            'Udemy',
+            'udemy',
             function (Container $app) {
-                $config = $app->make('config')->get('Udemy');
+                $config = $app->make('config')->get('udemy');
 
                 // Verify configuration exists.
                 if (is_null($config)) {
@@ -78,7 +75,7 @@ class UdemyServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['Udemy'];
+        return ['udemy'];
     }
 
     /**
@@ -88,6 +85,6 @@ class UdemyServiceProvider extends ServiceProvider
      */
     protected function isLogging()
     {
-        return Config::get('Udemy.logging', false);
+        return Config::get('udemy.logging', false);
     }
 }

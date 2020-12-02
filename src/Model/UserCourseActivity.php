@@ -2,7 +2,7 @@
 
 namespace Udemy\Laravel\Model;
 
-class Domain extends Model
+class UserCourseActivity extends Model
 {
 
 }
