@@ -2,9 +2,7 @@
 
 namespace Udemy\Laravel\Model;
 
-use Udemy\Laravel\Api\ApiInterface;
 use Udemy\Laravel\Api\Course as Api;
-use Illuminate\Support\Facades\Cache;
 
 /**
  * Class Course
@@ -40,17 +38,5 @@ use Illuminate\Support\Facades\Cache;
 
 class Course extends Model
 {
-
     protected $fillable = Api::properties;
-
-    public static function findByModel($model)
-    {
-//        return static::findByDomainAndPath($model->domain->hostname, $model->slug);
-        return static::all()->filter(
-            function ($link) use ($model) {
-                return $link->id = $model->udemy_id;
-            }
-        )->first();
-    }
-
 }
