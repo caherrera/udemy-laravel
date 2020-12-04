@@ -10,7 +10,6 @@ return [
     | This is host api for udemy
     |
     */
-
     'organization' =>[
         'domain' => env('UDEMY_ORGANIZATION_DOMAIN', ''),
         'id' => env('UDEMY_ORGANIZATION_ID', '')
@@ -24,27 +23,16 @@ return [
     | This is base path for endpoint
     |
     */
-
     'endpoints' => [
+        'course' => [
+            'list' => ['method' => 'GET', 'endpoint' => env('UDEMY_PATH_COURSE_LIST', 'courses/list')],
+        ],
         'user-activity' => [
-            'get' => ['method' => 'GET', 'endpoint' => env('UDEMY_PATH_USER_ACTIVITY', 'analytics/user-activity/?user_email=')],
             'list' => ['method' => 'GET', 'endpoint' => env('UDEMY_PATH_USERS_ACTIVITY', 'analytics/user-activity/')],
-
         ],
         'user-course-activity' => [
-            'get' => [
-                'id' => ['method' => 'GET', 'endpoint' => env('UDEMY_PATH_USER_COURSES_ACTIVITY', 'analytics/user-course-activity/?course_id=')],
-                'user' => ['method' => 'GET', 'endpoint' => env('UDEMY_PATH_USER_COURSES_ACTIVITY', 'analytics/user-course-activity/?user_email=')],
-            ],
             'list'   => ['method' => 'GET', 'endpoint' => env('UDEMY_PATH_USER_COURSE_ACTIVITY', 'analytics/user-course-activity/')],
         ],
-        'course' => [
-            'get' => [
-                'id' => ['method' => 'GET', 'endpoint' => env('UDEMY_PATH_COURSE_LIST', 'courses/list/?course_id=')],
-                'page-size' => ['method' => 'GET', 'endpoint' => env('UDEMY_PATH_COURSE_LIST', 'courses/list/?page_size=')],
-            ],
-            'list' => ['method' => 'GET', 'endpoint' => env('UDEMY_PATH_COURSE_LIST', 'courses/list')],
-        ]
     ],
 
     /*
@@ -57,11 +45,11 @@ return [
     | and JavaScript webpages and iPhone/Android apps.
     |
     */
-    'secret'  => env('UDEMY_KEY', null),
+    'secret'  => env('UDEMY_SECRET', null),
 
     /*
     |--------------------------------------------------------------------------
-    | Public Key
+    | CLient Id
     |--------------------------------------------------------------------------
     |
     | This key allows only to create a link on your domains. It is safe to
@@ -94,5 +82,4 @@ return [
     'cache'   => [
         'timeout' => env('UDEMY_CACHE_TIMEOUT', 3600),
     ]
-
 ];

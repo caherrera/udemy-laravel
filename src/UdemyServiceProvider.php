@@ -28,7 +28,6 @@ class UdemyServiceProvider extends ServiceProvider
                     $config => config_path('udemy.php'),
                 ]
             );
-           // $this->commands([Create::class,Links::class,GetLink::class]);
         }
     }
 
