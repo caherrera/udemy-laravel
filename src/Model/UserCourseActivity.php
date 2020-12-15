@@ -34,4 +34,13 @@ use Udemy\Laravel\Api\UserCourseActivity as Api;
 class UserCourseActivity extends Model
 {
     protected $fillable = Api::properties;
+
+    public static function findByModel($model)
+    {
+        return static::all()->filter(
+            function ($course) use ($model) {
+                return $course->id = $model->course_id;
+            }
+        )->first();
+    }
 }
