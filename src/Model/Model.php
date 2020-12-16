@@ -314,7 +314,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
 
         return Cache::remember(
             static::class.'@all',
-            config("Udemy.cache.timeout"),
+            config("udemy.cache.timeout"),
             function () use ($i) {
                 return $i->hydrate(
                     $i->getApi()->all()
@@ -790,7 +790,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
 
         return Cache::remember(
             $cache_key,
-            config('Udemy.cache.timeout'),
+            config('udemy.cache.timeout'),
             function () use ($api, $path) {
                 return $api->get($path);
             }
