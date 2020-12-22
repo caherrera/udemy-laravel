@@ -5,7 +5,7 @@ namespace Udemy\Laravel\Model;
 use Udemy\Laravel\Api\UserActivity as Api;
 
 /**
- * Class uSERActivity
+ * Class UserActivity
  *
  * @package Udemy\Laravel\Model
  *
