@@ -2,7 +2,7 @@
 
 namespace Udemy\Laravel\Api;
 
-class UserCourseActivity extends Api
+class UserActivity extends Api
 {
     const properties = [
         "user_name",
