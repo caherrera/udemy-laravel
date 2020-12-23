@@ -10,9 +10,9 @@ class Udemy implements ConnectionInterface
 {
     const HEADER_APIKEY = 'authorization';
     protected $course;
-    protected $useractivity;
-    protected $usercourseactivy;
-    /**
+    protected $user_activity;
+    protected $user_course_activy;
+    /**firstOrCreate
      * @var array
      */
     private $config;
@@ -144,13 +144,13 @@ class Udemy implements ConnectionInterface
     /**
      * @return UserActivity
      */
-    public function userActivities()
+    public function user_activities()
     {
-        if ($this->userActivities === null) {
-            $this->userActivities = new UserActivity($this);
+        if ($this->user_activities === null) {
+            $this->user_activities = new UserActivity($this);
         }
 
-        return $this->userActivities;
+        return $this->user_activities;
     }
 
     /**
@@ -158,11 +158,11 @@ class Udemy implements ConnectionInterface
      */
     public function userCourseActivities()
     {
-        if ($this->userCourseActivities === null) {
-            $this->userCourseActivities = new UserCourseActivity($this);
+        if ($this->user_course_activities === null) {
+            $this->user_course_activities = new UserCourseActivity($this);
         }
 
-        return $this->userCourseActivities;
+        return $this->user_course_activities;
     }
 
     public function getConfig($config = null)
