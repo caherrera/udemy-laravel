@@ -10,8 +10,8 @@ class Udemy implements ConnectionInterface
 {
     const HEADER_APIKEY = 'authorization';
     protected $course;
-    protected $user_activity;
-    protected $user_course_activy;
+    protected $user_activities;
+    protected $user_course_activies;
     /**firstOrCreate
      * @var array
      */
@@ -156,7 +156,7 @@ class Udemy implements ConnectionInterface
     /**
      * @return UserCourseActivity
      */
-    public function userCourseActivities()
+    public function user_course_activities()
     {
         if ($this->user_course_activities === null) {
             $this->user_course_activities = new UserCourseActivity($this);
