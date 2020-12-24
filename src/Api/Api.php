@@ -78,7 +78,7 @@ abstract class Api implements ApiInterface
 
     public function getHost()
     {
-        return $this->config['api'];
+        return $this->config['organization']['domain'] . $this->config['organization']['id'];
     }
 
     public function getProtocol()
