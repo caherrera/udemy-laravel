@@ -2,7 +2,7 @@
 
 namespace Udemy\Laravel\Model;
 
-use Udemy\Laravel\Api\UserCourseActivity as Api;
+use Udemy\Laravel\Api\UserCourse as Api;
 
 /**
  * Class UserCourseActivity
@@ -31,7 +31,7 @@ use Udemy\Laravel\Api\UserCourseActivity as Api;
  * @property-read lms_user_id
  */
 
-class UserCourseActivity extends Model
+class UserCourse extends Model
 {
     protected $fillable = Api::properties;
 }

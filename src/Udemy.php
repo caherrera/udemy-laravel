@@ -3,16 +3,17 @@
 namespace Udemy\Laravel;
 
 use Udemy\Laravel\Api\Course;
-use Udemy\Laravel\Api\UserActivity;
-use Udemy\Laravel\Api\UserCourseActivity;
+use Udemy\Laravel\Api\User;
+use Udemy\Laravel\Api\UserCourse;
 
 class Udemy implements ConnectionInterface
 {
     const HEADER_APIKEY = 'authorization';
     protected $course;
-    protected $user_activities;
+    protected $user;
     protected $user_course_activies;
     /**firstOrCreate
+     *
      * @var array
      */
     private $config;
@@ -77,7 +78,7 @@ class Udemy implements ConnectionInterface
      */
     public function prepareAuthorization()
     {
-        return 'Basic '.base64_encode($this->getClient() .':'. $this->getSecret());
+        return 'Basic '.base64_encode($this->getClient().':'.$this->getSecret());
     }
 
     /**
@@ -142,24 +143,24 @@ class Udemy implements ConnectionInterface
     }
 
     /**
-     * @return UserActivity
+     * @return User
      */
-    public function user_activities()
+    public function user()
     {
-        if ($this->user_activities === null) {
-            $this->user_activities = new UserActivity($this);
+        if ($this->user === null) {
+            $this->user = new User($this);
         }
 
-        return $this->user_activities;
+        return $this->user;
     }
 
     /**
-     * @return UserCourseActivity
+     * @return UserCourse
      */
     public function user_course_activities()
     {
         if ($this->user_course_activities === null) {
-            $this->user_course_activities = new UserCourseActivity($this);
+            $this->user_course_activities = new UserCourse($this);
         }
 
         return $this->user_course_activities;

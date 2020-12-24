@@ -2,7 +2,7 @@
 
 namespace Udemy\Laravel\Model;
 
-use Udemy\Laravel\Api\UserActivity as Api;
+use Udemy\Laravel\Api\User as Api;
 
 /**
  * Class UserActivity
@@ -26,7 +26,7 @@ use Udemy\Laravel\Api\UserActivity as Api;
  * @property-read last_date_visit
  */
 
-class UserActivity extends Model
+class User extends Model
 {
     protected $fillable = Api::properties;
 }
