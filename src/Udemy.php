@@ -11,7 +11,7 @@ class Udemy implements ConnectionInterface
     const HEADER_APIKEY = 'authorization';
     protected $course;
     protected $user_activities;
-    protected $user_course_activies;
+    protected $user_course_activities;
     /**firstOrCreate
      * @var array
      */
