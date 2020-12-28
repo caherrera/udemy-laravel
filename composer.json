@@ -59,6 +59,7 @@
   "require-dev": {
     "mockery/mockery": "^1.4",
     "phpunit/phpunit": "^9.2",
-    "orchestra/testbench": "^5.3"
+    "orchestra/testbench": "^5.0",
+    "guzzlehttp/guzzle": "^7.2"
   }
 }

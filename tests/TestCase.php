@@ -2,9 +2,19 @@
 
 namespace Udemy\Laravel\Tests;
 
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Orchestra\Testbench\TestCase as BaseTestCase;
+use Udemy\Laravel\Facades\Udemy;
+use Udemy\Laravel\UdemyServiceProvider;
 
 class TestCase extends BaseTestCase
 {
-    use CreatesApplication;
+    protected function getPackageProviders($app)
+    {
+        return [UdemyServiceProvider::class];
+    }
+
+    protected function getPackageAliases($app)
+    {
+        return ['udemy' => Udemy::class,];
+    }
 }
