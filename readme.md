@@ -58,7 +58,7 @@ Udemy::domains()->all();
 If you prefer to use models over facades like me, then you can easily inject the manager like so:
 
 ```php
-use Udemy\Laravel\Model\Link;
+use Udemy\Laravel\Model\User;
 
 class Foo
 {
@@ -66,12 +66,12 @@ class Foo
 
     public function __construct()
     {
-        $this->link = new Link();
+        $this->user = new User();
     }
 
-    public function bar()
+    public function all()
     {
-        return $this->link->all();
+        return $this->user->all();
     }
 }
 
@@ -94,8 +94,6 @@ Laravel GitLab is licensed under [The MIT License (MIT)](LICENSE).
 ## Contributions
 Special thanks to 
 
+* [Emanuel Rodriguez](https://github.com/eRodriguez8/)
 * [Gabriel Lavini](https://github.com/glavini/)
-* Francisco Molina
-* Felipe Galdamez
-* Juan Bardas
 

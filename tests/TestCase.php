@@ -2,39 +2,28 @@
 
 namespace Udemy\Laravel\Tests;
 
-use Udemy\Laravel\UdemyServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
-use Orchestra\Testbench\Concerns\CreatesApplication;
+use Udemy\Laravel\Facades\Udemy;
+use Udemy\Laravel\UdemyServiceProvider;
 
 class TestCase extends BaseTestCase
 {
-    use CreatesApplication;
-
     protected function getPackageProviders($app)
     {
-        return [
-            UdemyServiceProvider::class,
-        ];
+        return [UdemyServiceProvider::class];
     }
 
-    /**
-     * Define the environment setup.
-     *
-     * @param  \Illuminate\Foundation\Application  $app
-     */
-    protected function getEnvironmentSetup($app)
+    protected function getPackageAliases($app)
     {
-        $config = $app['config'];
+        return ['udemy' => Udemy::class,];
+    }
 
-        // Laravel database setup.
-        $config->set('database.default', 'testbench');
-        $config->set(
-            'database.connections.testbench',
-            [
-                'driver'   => 'sqlite',
-                'database' => ':memory:',
-                'prefix'   => '',
-            ]
-        );
+    protected function getEnvironmentSetUp($app)
+    {
+        $env    = realpath(__DIR__.'/../');
+        $dotenv = \Dotenv\Dotenv::createImmutable($env, '.env');
+        $dotenv->safeLoad();
+        $path = config_path('udemy.php');
+//        $app->config->set('udemy', $config);
     }
 }

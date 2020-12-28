@@ -2,7 +2,7 @@
   "name": "caherrera/udemy-laravel",
   "description": "udemy-laravel Is A Udemy Api Cli For Laravel",
   "license": "MIT",
-  "version": "0.2.3",
+  "version": "0.2.5",
   "keywords": [
     "laravel",
     "framework",
@@ -59,6 +59,7 @@
   "require-dev": {
     "mockery/mockery": "^1.4",
     "phpunit/phpunit": "^9.2",
-    "orchestra/testbench": "^5.3"
+    "orchestra/testbench": "^5.0",
+    "guzzlehttp/guzzle": "^7.2"
   }
 }

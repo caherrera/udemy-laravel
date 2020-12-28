@@ -66,7 +66,7 @@ abstract class Api implements ApiInterface
     {
         $host     = $this->getHost();
         $protocol = $this->getProtocol();
-        $path     = $this->getPath($url);
+        $path     = $url;
         $basePath = collect(["$protocol:/", $host, $path])->filter(
             function ($i) {
                 return ! empty($i) && $i !== "/";
@@ -76,34 +76,15 @@ abstract class Api implements ApiInterface
         return $basePath."/";
     }
 
+
     public function getHost()
     {
-        return $this->config['organization']['domain'] . $this->config['organization']['id'];
+        return collect([$this->config['organization']['domain'], $this->config['organization']['id']])->join('/');
     }
 
     public function getProtocol()
     {
         return $this->config['secure'] ? 'https' : 'http';
-    }
-
-    /**
-     * @return string
-     */
-    public function getPath(): string
-    {
-        return collect(explode('/', $this->path))->merge(func_get_args())->join('/');
-    }
-
-    /**
-     * @param  string  $path
-     *
-     * @return Api
-     */
-    public function setPath(string $path): Api
-    {
-        $this->path = $path;
-
-        return $this;
     }
 
     public function prepareHeaders()
@@ -134,6 +115,45 @@ abstract class Api implements ApiInterface
     public function getFullPath($path = null)
     {
         return $this->getPath(Str::slug(Str::plural($this->className())), $path);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPath(): string
+    {
+        return $this->getBaseUrl().collect(func_get_args())->filter(
+                function ($p) {
+                    return ! empty($p);
+                }
+            )->join('/');
+    }
+
+    /**
+     * @param  string  $path
+     *
+     * @return Api
+     */
+    public function setPath(string $path): Api
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBaseUrl(): string
+    {
+        return $this->baseUrl;
+    }
+
+    public function setBaseUrl($url)
+    {
+        $this->baseUrl = $url;
+
+        return $this;
     }
 
     public function className()
@@ -187,12 +207,13 @@ abstract class Api implements ApiInterface
      * @return array|mixed
      * @throws \Exception
      */
-    private function processRequest($method, $url = '', $query = [])
+    protected function processRequest($method, $url = '', $query = [])
     {
+        $query             = collect($this->getQueryString())->merge($query)->unique()->all();
         $response          = $this->__callRequest(
             $method,
             $url,
-            collect($this->getQueryString())->merge($query)->unique()->all()
+            $query
         );
         $this->responses[] = $response;
 
@@ -203,6 +224,26 @@ abstract class Api implements ApiInterface
         } else {
             throw new \Exception($response->body());
         }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQueryString()
+    {
+        return $this->queryString;
+    }
+
+    /**
+     * @param  mixed  $queryString
+     *
+     * @return Api
+     */
+    public function setQueryString(array $queryString)
+    {
+        $this->queryString = $queryString;
+
+        return $this;
     }
 
     /**
@@ -231,44 +272,9 @@ abstract class Api implements ApiInterface
         return $this->requests[] = $request;
     }
 
-    /**
-     * @return string
-     */
-    public function getBaseUrl(): string
-    {
-        return $this->baseUrl;
-    }
-
-    public function setBaseUrl($url)
-    {
-        $this->baseUrl = $url;
-
-        return $this;
-    }
-
     protected function getHeaders()
     {
         return $this->getConnector()->getHeaders();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getQueryString()
-    {
-        return $this->queryString;
-    }
-
-    /**
-     * @param  mixed  $queryString
-     *
-     * @return Api
-     */
-    public function setQueryString(array $queryString)
-    {
-        $this->queryString = $queryString;
-
-        return $this;
     }
 
     public function all()
@@ -327,7 +333,7 @@ abstract class Api implements ApiInterface
     {
         $ref  = Str::lower($this->className());
         $name = Str::lower($name);
-        $url  = config("Udemy.endpoints.$ref.$name.endpoint");
+        $url  = $this->config['endpoints'][$ref][$name]['endpoint'];
         $url  = $this->getPath($url, $id);
 
         return $url;
