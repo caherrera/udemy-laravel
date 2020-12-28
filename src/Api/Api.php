@@ -122,11 +122,11 @@ abstract class Api implements ApiInterface
      */
     public function getPath(): string
     {
-        return $this->getBaseUrl() . collect(func_get_args())->filter(
-            function ($p) {
-                return ! empty($p);
-            }
-        )->join('/');
+        return $this->getBaseUrl().collect(func_get_args())->filter(
+                function ($p) {
+                    return ! empty($p);
+                }
+            )->join('/');
     }
 
     /**
@@ -209,10 +209,11 @@ abstract class Api implements ApiInterface
      */
     protected function processRequest($method, $url = '', $query = [])
     {
+        $query             = collect($this->getQueryString())->merge($query)->unique()->all();
         $response          = $this->__callRequest(
             $method,
             $url,
-            collect($this->getQueryString())->merge($query)->unique()->all()
+            $query
         );
         $this->responses[] = $response;
 
@@ -223,6 +224,26 @@ abstract class Api implements ApiInterface
         } else {
             throw new \Exception($response->body());
         }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQueryString()
+    {
+        return $this->queryString;
+    }
+
+    /**
+     * @param  mixed  $queryString
+     *
+     * @return Api
+     */
+    public function setQueryString(array $queryString)
+    {
+        $this->queryString = $queryString;
+
+        return $this;
     }
 
     /**
@@ -254,26 +275,6 @@ abstract class Api implements ApiInterface
     protected function getHeaders()
     {
         return $this->getConnector()->getHeaders();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getQueryString()
-    {
-        return $this->queryString;
-    }
-
-    /**
-     * @param  mixed  $queryString
-     *
-     * @return Api
-     */
-    public function setQueryString(array $queryString)
-    {
-        $this->queryString = $queryString;
-
-        return $this;
     }
 
     public function all()

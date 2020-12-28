@@ -23,11 +23,11 @@ class UdemyServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $config = __DIR__.'/Config/config.php';
 
-            $this->publishes(
-                [
-                    $config => config_path('udemy.php'),
-                ]
-            );
+            if ( ! $this->app->runningUnitTests()) {
+                $this->publishes([$config => config_path('udemy.php')]);
+            } else {
+                $this->mergeConfigFrom($config, 'udemy');
+            }
         }
     }
 

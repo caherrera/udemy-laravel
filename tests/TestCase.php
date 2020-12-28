@@ -17,4 +17,13 @@ class TestCase extends BaseTestCase
     {
         return ['udemy' => Udemy::class,];
     }
+
+    protected function getEnvironmentSetUp($app)
+    {
+        $env    = realpath(__DIR__.'/../');
+        $dotenv = \Dotenv\Dotenv::createImmutable($env, '.env');
+        $dotenv->safeLoad();
+        $path = config_path('udemy.php');
+//        $app->config->set('udemy', $config);
+    }
 }
