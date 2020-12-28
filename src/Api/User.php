@@ -26,7 +26,7 @@ class User extends Api
 
     public function get($id = null)
     {
-        return $this->processRequest('get', $this->prepareGetUrl(), ['user_email' => $id]);
+        return $this->processRequest('get', $this->prepareGetUrl(), $id ? ['user_email' => $id] : []);
     }
 
     public function prepareGetUrl($id = null)
