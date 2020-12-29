@@ -3,16 +3,16 @@
 namespace Udemy\Laravel\Model;
 
 use ArrayAccess;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Collection as BaseCollection;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 use JsonSerializable;
 use Udemy\Laravel\Api\ApiInterface;
 use Udemy\Laravel\Facades\Udemy;
-use Udemy\Laravel\Model\Concerns\HasEvents;
-use Udemy\Laravel\Model\Concerns\HasAttributes;
-use Udemy\Laravel\Model\Concerns\HidesAttributes;
 use Udemy\Laravel\Model\Concerns\GuardsAttributes;
+use Udemy\Laravel\Model\Concerns\HasAttributes;
+use Udemy\Laravel\Model\Concerns\HasEvents;
+use Udemy\Laravel\Model\Concerns\HidesAttributes;
 use Udemy\Laravel\Model\Exceptions\MassAssignmentException;
 
 abstract class Model implements ArrayAccess, JsonSerializable
@@ -301,11 +301,32 @@ abstract class Model implements ArrayAccess, JsonSerializable
 
     public static function find($id)
     {
-        return collect(static::all())->filter(
-            function ($instance) use ($id) {
-                return $id == $instance->id;
+        return static::first($id);
+    }
+
+    public static function first($id)
+    {
+        return (new static)->get($id)->first();
+    }
+
+    public function get($path = null)
+    {
+        $cache_key = static::class.'@get';
+        if ($path) {
+            $cache_key .= '/'.$path;
+        }
+        if ($this->getApi()->hasQueryString()) {
+            $cache_key .= '/'.base64_encode(serialize($this->getApi()->getQueryString()));
+        }
+        $api = $this->getApi();
+
+        return Cache::remember(
+            $cache_key,
+            config('udemy.cache.timeout'),
+            function () use ($api, $path) {
+                return $api->get($path);
             }
-        )->first();
+        );
     }
 
     static public function all()
@@ -777,24 +798,16 @@ abstract class Model implements ArrayAccess, JsonSerializable
         return $this;
     }
 
-    public function get($path = null)
+    /**
+     * Determine if the given relation is loaded.
+     *
+     * @param  string  $key
+     *
+     * @return bool
+     */
+    public function relationLoaded($key)
     {
-        $cache_key = static::class.'@get';
-        if ($path) {
-            $cache_key .= '/'.$path;
-        }
-        if ($this->getApi()->hasQueryString()) {
-            $cache_key .= '/'.base64_encode(serialize($this->getApi()->getQueryString()));
-        }
-        $api = $this->getApi();
-
-        return Cache::remember(
-            $cache_key,
-            config('udemy.cache.timeout'),
-            function () use ($api, $path) {
-                return $api->get($path);
-            }
-        );
+        return true;
     }
 
     /**
@@ -807,17 +820,6 @@ abstract class Model implements ArrayAccess, JsonSerializable
         foreach (static::$traitInitializers[static::class] as $method) {
             $this->{$method}();
         }
-    }
-
-    /**
-     * Determine if the given relation is loaded.
-     *
-     * @param  string  $key
-     * @return bool
-     */
-    public function relationLoaded($key)
-    {
-        return true;
     }
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Udemy\Laravel\Tests\Integration;
+namespace Udemy\Laravel\Tests\Integration\Api;
 
 use Illuminate\Support\Facades\Config;
 use Udemy\Laravel\Api\User;
@@ -14,7 +14,7 @@ class UserTest extends TestCase
     {
         $config = Config::get('udemy');
         $udemy  = new Udemy($config);
-        $users  = $udemy->user();
+        $users  = $udemy->users();
         $this->assertInstanceOf(User::class, $users);
 
         $user = $users->get('carlos.herreracaceres@cencosud.cl');
