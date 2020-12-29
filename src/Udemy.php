@@ -9,9 +9,9 @@ use Udemy\Laravel\Api\UserCourse;
 class Udemy implements ConnectionInterface
 {
     const HEADER_APIKEY = 'authorization';
-    protected $course;
+    protected $courses;
     protected $users;
-    protected $user_course_activies;
+    protected $user_courses;
     /**firstOrCreate
      *
      * @var array
@@ -157,13 +157,13 @@ class Udemy implements ConnectionInterface
     /**
      * @return UserCourse
      */
-    public function user_course_activities()
+    public function user_courses()
     {
-        if ($this->user_course_activities === null) {
-            $this->user_course_activities = new UserCourse($this);
+        if ($this->user_courses === null) {
+            $this->user_courses = new UserCourse($this);
         }
 
-        return $this->user_course_activities;
+        return $this->user_courses;
     }
 
     public function getConfig($config = null)
