@@ -2,6 +2,8 @@
 
 namespace Udemy\Laravel\Api;
 
+use Illuminate\Support\Str;
+
 class UserCourse extends Api
 {
     const properties = [
@@ -26,4 +28,20 @@ class UserCourse extends Api
         "user_is_deactivated",
         "lms_user_id",
     ];
+
+    public function get($id = null)
+    {
+        return $this->processRequest('get', $this->prepareGetUrl(), $id ? ['user_email' => $id] : []);
+    }
+
+    public function prepareGetUrl($id = null)
+    {
+        $ref      = Str::lower($this->className());
+        $name     = 'list';
+        $config   = $this->getConfig();
+        $endpoint = $config['endpoints'][$ref][$name]['endpoint'];
+        $url      = $this->getPath($endpoint, $id);
+
+        return $url;
+    }
 }

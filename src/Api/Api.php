@@ -169,7 +169,7 @@ abstract class Api implements ApiInterface
      */
     public function hasQueryString()
     {
-        return count($this->queryString) > 0;
+        return $this->queryString !== null && !empty($this->queryString);
     }
 
     public function client()
