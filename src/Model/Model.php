@@ -324,7 +324,9 @@ abstract class Model implements ArrayAccess, JsonSerializable
             $cache_key,
             config('udemy.cache.timeout'),
             function () use ($api, $path) {
-                return $api->get($path);
+                $response = $api->get($path);
+
+                return $response['results'] ?? [];
             }
         );
     }
