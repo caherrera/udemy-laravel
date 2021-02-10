@@ -125,7 +125,7 @@ abstract class Api implements ApiInterface
      */
     public function getPath(): string
     {
-        return $this->getBaseUrl().collect(func_get_args())->filter(
+        return collect(func_get_args())->filter(
                 function ($p) {
                     return ! empty($p);
                 }
