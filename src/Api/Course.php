@@ -36,7 +36,7 @@ class Course extends Api
 
     public function get($id = null)
     {
-        return $this->processRequest('get', $this->prepareGetUrl(), []);
+        return $this->processRequest('get', $this->prepareGetUrl($id), []);
     }
 
     public function prepareGetUrl($id = null)
