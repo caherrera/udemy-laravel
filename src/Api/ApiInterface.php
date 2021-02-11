@@ -38,7 +38,7 @@ interface ApiInterface
 
     public function setBaseUrl($url);
 
-    public function all();
+    public function all($page = null);
 
     public function save(array $data = []);
 

@@ -12,6 +12,7 @@ return [
     */
     'organization' =>[
         'domain' => env('UDEMY_ORGANIZATION_DOMAIN', ''),
+        'api_path' => env('UDEMY_ORGANIZATION_API_PATH',''),
         'id' => env('UDEMY_ORGANIZATION_ID', '')
     ],
 
@@ -30,7 +31,7 @@ return [
         'user' => [
             'list' => ['method' => 'GET', 'endpoint' => env('UDEMY_PATH_USERS_ACTIVITY', 'analytics/user-activity/')],
         ],
-        'user-course-activity' => [
+        'usercourse' => [
             'list'   => ['method' => 'GET', 'endpoint' => env('UDEMY_PATH_USER_COURSE_ACTIVITY', 'analytics/user-course-activity/')],
         ],
     ],
@@ -49,7 +50,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | CLient Id
+    | Client Id
     |--------------------------------------------------------------------------
     |
     | This key allows only to create a link on your domains. It is safe to

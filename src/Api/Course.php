@@ -50,16 +50,8 @@ class Course extends Api
         return $url;
     }
 
-    public function all()
+    public function all($page = null)
     {
-        $page    = 1;
-        $size    = 25;
-        $courses = collect();
-        do {
-            $response = $this->processRequest('get', $this->prepareGetUrl(), []);
-            $courses->merge($response['results'] ?? []);
-        } while ($page <= intdiv($response['count'], $size) + 1);
-
-        return $courses->toArray();
+        return $this->processRequest('get', $this->prepareListUrl(), $page ? ['page' => $page] : []);
     }
 }

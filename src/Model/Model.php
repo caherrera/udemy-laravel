@@ -331,17 +331,22 @@ abstract class Model implements ArrayAccess, JsonSerializable
         );
     }
 
-    static public function all()
+    public function all($page = null)
     {
-        $i = (new static)->newInstance();
+        $cache_key = static::class.'@all';
+        if ($page) {
+            $cache_key .= '/?page='.$page;
+        }
+
+        $api = $this->getApi();
 
         return Cache::remember(
-            static::class.'@all',
-            config("udemy.cache.timeout"),
-            function () use ($i) {
-                return $i->hydrate(
-                    $i->getApi()->all()
-                )->all();
+            $cache_key,
+            config('udemy.cache.timeout'),
+            function () use ($api, $page) {
+                $response = $api->all($page);
+
+                return $response;
             }
         );
     }

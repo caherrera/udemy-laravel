@@ -19,6 +19,8 @@ abstract class Api implements ApiInterface
      * @var Response
      */
     protected $responses = [];
+
+    protected $response;
     /**
      * @var string
      */
@@ -50,6 +52,7 @@ abstract class Api implements ApiInterface
              ->setConfig($connector->config())
              ->setBaseUrl($this->prepareBaseUrl())
              ->setHeaders($this->prepareHeaders());
+        $this->response = new ApiResponse();
     }
 
     protected function setHeaders(Arrayable $headers = null)
@@ -79,7 +82,7 @@ abstract class Api implements ApiInterface
 
     public function getHost()
     {
-        return collect([$this->config['organization']['domain'], $this->config['organization']['id']])->join('/');
+        return collect([$this->config['organization']['domain'], $this->config['organization']['api_path'], $this->config['organization']['id']])->join('/');
     }
 
     public function getProtocol()
@@ -277,9 +280,9 @@ abstract class Api implements ApiInterface
         return $this->getConnector()->getHeaders();
     }
 
-    public function all()
+    public function all($page = null)
     {
-        $array = $this->processRequest('get', $this->prepareListUrl());
+        $array = $this->processRequest('get', $this->prepareListUrl(), $page ? ['page' => $page] : []);
 
         return $array ?? [];
     }
