@@ -2,6 +2,8 @@
 
 namespace Udemy\Laravel\Api;
 
+use Illuminate\Support\Str;
+
 class Course extends Api
 {
     const properties = [
@@ -31,4 +33,33 @@ class Course extends Api
         "caption_locales",
         "estimated_content_length_video",
     ];
+
+    public function get($id = null)
+    {
+        return $this->processRequest('get', $this->prepareGetUrl($id), []);
+    }
+
+    public function prepareGetUrl($id = null)
+    {
+        $ref      = Str::lower($this->className());
+        $name     = 'list';
+        $config   = $this->getConfig();
+        $endpoint = $config['endpoints'][$ref][$name]['endpoint'];
+        $url      = $this->getPath($endpoint, $id);
+
+        return $url;
+    }
+
+    public function all()
+    {
+        $page    = 1;
+        $size    = 25;
+        $courses = collect();
+        do {
+            $response = $this->processRequest('get', $this->prepareGetUrl(), []);
+            $courses->merge($response['results'] ?? []);
+        } while ($page <= intdiv($response['count'], $size) + 1);
+
+        return $courses->toArray();
+    }
 }
