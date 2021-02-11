@@ -280,9 +280,9 @@ abstract class Api implements ApiInterface
         return $this->getConnector()->getHeaders();
     }
 
-    public function all()
+    public function all($page = null)
     {
-        $array = $this->processRequest('get', $this->prepareListUrl());
+        $array = $this->processRequest('get', $this->prepareListUrl(), $page ? ['page' => $page] : []);
 
         return $array ?? [];
     }

@@ -13,12 +13,24 @@ class UserTest extends TestCase
     public function testGetOne()
     {
         $config = Config::get('udemy');
-        $udemy  = new Udemy($config);
-        $users  = $udemy->users();
+        $udemy = new Udemy($config);
+        $users = $udemy->users();
         $this->assertInstanceOf(User::class, $users);
 
-        $user = $users->get('carlos.herreracaceres@cencosud.cl');
+        $response = $users->get('carlos.herreracaceres@cencosud.cl');
 
-        $this->assertNotEmpty($user);
+        $this->assertNotEmpty($response);
+    }
+
+    public function testGet()
+    {
+        $config = Config::get('udemy');
+        $udemy = new Udemy($config);
+        $users = $udemy->users();
+        $this->assertInstanceOf(User::class, $users);
+
+        $response = $users->get();
+
+        $this->assertNotEmpty($response);
     }
 }
