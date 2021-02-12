@@ -1,0 +1,31 @@
+<?php
+
+return PhpCsFixer\Config::create()
+    ->setRiskyAllowed(true)
+    ->setRules([
+        '@Symfony' => true,
+        'array_syntax' => ['syntax' => 'short'],
+        'strict_comparison' => true,
+        'phpdoc_no_empty_return' => true,
+        'phpdoc_to_comment' => true,
+        'ordered_imports' => true,
+        'phpdoc_add_missing_param_annotation' => true,
+        'phpdoc_order' => true,
+        'phpdoc_types_order' => ['null_adjustment' => 'always_last'],
+        'combine_consecutive_unsets' => true,
+        'yoda_style' => [
+            'equal' => false,
+            'identical' => false,
+            'less_and_greater' => false,
+            'always_move_variable' => true
+        ],
+        'binary_operator_spaces' => [
+                    'align_double_arrow' => true,
+                    'align_equals' => true,
+        ],
+    ])
+    ->setFinder(
+        PhpCsFixer\Finder::create()
+            ->in(__DIR__.'/src')
+    )
+;

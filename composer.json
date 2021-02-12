@@ -38,7 +38,8 @@
   ],
   "require": {
     "ext-json": "*",
-    "illuminate/contracts": "^7.0"
+    "illuminate/contracts": "^7.0",
+    "vimeo/psalm": "^4.5"
   },
   "autoload": {
     "psr-4": {
@@ -68,5 +69,15 @@
     "orchestra/testbench": "^5.0",
     "guzzlehttp/guzzle": "^7.2",
     "friendsofphp/php-cs-fixer": "^2.13"
+  },
+
+  "scripts": {
+    "lint": "php-cs-fixer fix --allow-risky=yes",
+    "pr": [
+      "php-cs-fixer fix --dry-run -vvv",
+      "phpunit --testdox --coverage-text",
+      "psalm --stats"
+    ]
   }
+
 }
