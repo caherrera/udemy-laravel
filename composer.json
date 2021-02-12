@@ -2,7 +2,7 @@
   "name": "caherrera/udemy-laravel",
   "description": "udemy-laravel Is A Udemy Api Cli For Laravel",
   "license": "MIT",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "keywords": [
     "laravel",
     "framework",
@@ -13,7 +13,9 @@
     "udemy",
     "Laravel udemy",
     "Carlos Herrera",
-    "Caherrera"
+    "Caherrera",
+    "Emanuel Rodriguez",
+    "Nicolas Ramirez"
   ],
   "support": {
     "docs": "https://github.com/caherrera/udemy-laravel/blob/master/readme.md",
@@ -28,6 +30,10 @@
     {
       "name": "Emanuel Rodriguez",
       "email": "rodriguez.emanuel14@gmail.com"
+    },
+    {
+      "name": "Nicolas Ramirez",
+      "email": "nicolas.ramirez.dev@gmail.com"
     }
   ],
   "require": {
