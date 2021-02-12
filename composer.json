@@ -2,7 +2,6 @@
   "name": "caherrera/udemy-laravel",
   "description": "udemy-laravel Is A Udemy Api Cli For Laravel",
   "license": "MIT",
-  "version": "0.3.4",
   "keywords": [
     "laravel",
     "framework",
