@@ -96,4 +96,5 @@ Special thanks to
 
 * [Emanuel Rodriguez](https://github.com/eRodriguez8/)
 * [Gabriel Lavini](https://github.com/glavini/)
+* [Nicolas Ramirez](https://github.com/VoodooNik/)
 
