@@ -1,13 +1,11 @@
 <?php
 
-
 namespace Udemy\Laravel\Api;
 
 use Udemy\Laravel\ConnectionInterface;
 
 interface ApiInterface
 {
-
     public function prepareBaseUrl($url = null);
 
     public function getHost();
@@ -61,15 +59,15 @@ interface ApiInterface
     public function getQueryString();
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function hasQueryString();
 
     public function withQueryString(array $data = []);
 
     /**
-     * @param  string|array  $key
-     * @param  null  $value
+     * @param array|string $key
+     * @param null         $value
      *
      * @return mixed
      */
@@ -79,5 +77,4 @@ interface ApiInterface
      * @return \Illuminate\Http\Client\PendingRequest
      */
     public function prepareRequest();
-
 }

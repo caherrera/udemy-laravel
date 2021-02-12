@@ -11,8 +11,6 @@ class UdemyServiceProvider extends ServiceProvider
 {
     /**
      * Run service provider boot operations.
-     *
-     * @return void
      */
     public function boot()
     {
@@ -23,7 +21,7 @@ class UdemyServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $config = __DIR__.'/Config/config.php';
 
-            if ( ! $this->app->runningUnitTests()) {
+            if (!$this->app->runningUnitTests()) {
                 $this->publishes([$config => config_path('udemy.php')]);
             } else {
                 $this->mergeConfigFrom($config, 'udemy');
@@ -43,8 +41,6 @@ class UdemyServiceProvider extends ServiceProvider
 
     /**
      * Register the service provider.
-     *
-     * @return void
      */
     public function register()
     {

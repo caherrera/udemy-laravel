@@ -9,9 +9,7 @@ use Illuminate\Support\Str;
 use Udemy\Laravel\ConnectionInterface;
 
 /**
- * Class Api
- *
- * @package Udemy\Laravel\Api
+ * Class Api.
  */
 abstract class Api implements ApiInterface
 {
@@ -63,6 +61,8 @@ abstract class Api implements ApiInterface
     }
 
     /**
+     * @param mixed|null $url
+     *
      * @return string
      */
     public function prepareBaseUrl($url = null)
@@ -72,13 +72,12 @@ abstract class Api implements ApiInterface
         $path     = $url;
         $basePath = collect(["$protocol:/", $host, $path])->filter(
             function ($i) {
-                return ! empty($i) && $i !== "/";
+                return !empty($i) && $i !== '/';
             }
         )->join('/');
 
-        return $basePath."/";
+        return $basePath.'/';
     }
-
 
     public function getHost()
     {
@@ -104,7 +103,7 @@ abstract class Api implements ApiInterface
     }
 
     /**
-     * @param  mixed  $connector
+     * @param mixed $connector
      *
      * @return Api
      */
@@ -120,23 +119,15 @@ abstract class Api implements ApiInterface
         return $this->getPath(Str::slug(Str::plural($this->className())), $path);
     }
 
-    /**
-     * @return string
-     */
     public function getPath(): string
     {
         return collect(func_get_args())->filter(
                 function ($p) {
-                    return ! empty($p);
+                    return !empty($p);
                 }
             )->join('/');
     }
 
-    /**
-     * @param  string  $path
-     *
-     * @return Api
-     */
     public function setPath(string $path): Api
     {
         $this->path = $path;
@@ -144,9 +135,6 @@ abstract class Api implements ApiInterface
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getBaseUrl(): string
     {
         return $this->baseUrl;
@@ -165,7 +153,7 @@ abstract class Api implements ApiInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function hasQueryString()
     {
@@ -186,7 +174,7 @@ abstract class Api implements ApiInterface
     }
 
     /**
-     * @param  mixed  $config
+     * @param mixed $config
      *
      * @return Api
      */
@@ -204,11 +192,12 @@ abstract class Api implements ApiInterface
 
     /**
      * @param $method
-     * @param  string  $url
-     * @param  array  $query
+     * @param string $url
+     * @param array  $query
+     *
+     * @throws \Exception
      *
      * @return array|mixed
-     * @throws \Exception
      */
     protected function processRequest($method, $url = '', $query = [])
     {
@@ -238,7 +227,7 @@ abstract class Api implements ApiInterface
     }
 
     /**
-     * @param  mixed  $queryString
+     * @param mixed $queryString
      *
      * @return Api
      */
@@ -251,8 +240,8 @@ abstract class Api implements ApiInterface
 
     /**
      * @param $method
-     * @param  string  $url
-     * @param  array  $query
+     * @param string $url
+     * @param array  $query
      *
      * @return \Illuminate\Http\Client\Response
      */
@@ -345,7 +334,7 @@ abstract class Api implements ApiInterface
     public function __call($name, $arguments)
     {
         switch (true) {
-            case preg_match("/prepare(.*)Url/", $name, $match):
+            case preg_match('/prepare(.*)Url/', $name, $match):
                 return call_user_func_array([$this, 'prepareGenericUrl'], array_merge([$match[1]], $arguments));
         }
     }

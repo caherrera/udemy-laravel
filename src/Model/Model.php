@@ -17,8 +17,10 @@ use Udemy\Laravel\Model\Exceptions\MassAssignmentException;
 
 abstract class Model implements ArrayAccess, JsonSerializable
 {
-
-    use GuardsAttributes, HasAttributes, HasEvents, HidesAttributes;
+    use GuardsAttributes;
+    use HasAttributes;
+    use HasEvents;
+    use HidesAttributes;
 
     /**
      * The name of the "created at" column.
@@ -31,7 +33,6 @@ abstract class Model implements ArrayAccess, JsonSerializable
      *
      * @var string
      */
-
     const UPDATED_AT = 'updatedAt';
     /**
      * The event dispatcher instance.
@@ -76,10 +77,6 @@ abstract class Model implements ArrayAccess, JsonSerializable
 
     /**
      * Create a new Eloquent model instance.
-     *
-     * @param  array  $attributes
-     *
-     * @return void
      */
     public function __construct(array $attributes = [])
     {
@@ -91,12 +88,10 @@ abstract class Model implements ArrayAccess, JsonSerializable
 
     /**
      * Check if the model needs to be booted and if so, do it.
-     *
-     * @return void
      */
     protected function bootIfNotBooted()
     {
-        if ( ! isset(static::$booted[static::class])) {
+        if (!isset(static::$booted[static::class])) {
             static::$booted[static::class] = true;
 
             $this->fireModelEvent('booting', false);
@@ -111,18 +106,13 @@ abstract class Model implements ArrayAccess, JsonSerializable
 
     /**
      * Perform any actions required before the model boots.
-     *
-     * @return void
      */
     protected static function booting()
     {
-        //
     }
 
     /**
      * Bootstrap the model and its traits.
-     *
-     * @return void
      */
     protected static function boot()
     {
@@ -131,8 +121,6 @@ abstract class Model implements ArrayAccess, JsonSerializable
 
     /**
      * Boot all of the bootable traits on the model.
-     *
-     * @return void
      */
     protected static function bootTraits()
     {
@@ -145,7 +133,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
         foreach (class_uses_recursive($class) as $trait) {
             $method = 'boot'.class_basename($trait);
 
-            if (method_exists($class, $method) && ! in_array($method, $booted)) {
+            if (method_exists($class, $method) && !in_array($method, $booted)) {
                 forward_static_call([$class, $method]);
 
                 $booted[] = $method;
@@ -163,22 +151,17 @@ abstract class Model implements ArrayAccess, JsonSerializable
 
     /**
      * Perform any actions required after the model boots.
-     *
-     * @return void
      */
     protected static function booted()
     {
-        //
     }
 
     /**
      * Fill the model with an array of attributes.
      *
-     * @param  array  $attributes
+     * @throws \Illuminate\Database\Eloquent\MassAssignmentException
      *
      * @return $this
-     *
-     * @throws \Illuminate\Database\Eloquent\MassAssignmentException
      */
     public function fill(array $attributes)
     {
@@ -193,13 +176,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
             if ($this->isFillable($key)) {
                 $this->setAttribute($key, $value);
             } elseif ($totallyGuarded) {
-                throw new MassAssignmentException(
-                    sprintf(
-                        'This [%s] property is not allowed in mass assignment on [%s].',
-                        $key,
-                        get_class($this)
-                    )
-                );
+                throw new MassAssignmentException(sprintf('This [%s] property is not allowed in mass assignment on [%s].', $key, get_class($this)));
             }
         }
 
@@ -209,7 +186,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
     /**
      * Remove the table name from a given key.
      *
-     * @param  string  $key
+     * @param string $key
      *
      * @return string
      */
@@ -221,7 +198,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
     /**
      * Destroy the models for the given IDs.
      *
-     * @param  \Illuminate\Support\Collection|array|int|string  $ids
+     * @param array|\Illuminate\Support\Collection|int|string $ids
      *
      * @return int
      */
@@ -241,7 +218,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
         // We will actually pull the models from the database table and call delete on
         // each of them individually so that their events get fired properly with a
         // correct set of attributes in case the developers wants to check these.
-        $key = ($instance = new static)->getKeyName();
+        $key = ($instance = new static())->getKeyName();
 
         $api   = $instance->getApi();
         $count = collect($ids)->reduce(
@@ -277,7 +254,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
     }
 
     /**
-     * @param  mixed  $api
+     * @param mixed $api
      *
      * @return Model
      */
@@ -306,7 +283,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
 
     public static function first($id)
     {
-        return (new static)->get($id)->first();
+        return (new static())->get($id)->first();
     }
 
     public function get($path = null)
@@ -354,8 +331,8 @@ abstract class Model implements ArrayAccess, JsonSerializable
     /**
      * Create a new instance of the given model.
      *
-     * @param  array  $attributes
-     * @param  bool  $exists
+     * @param array $attributes
+     * @param bool  $exists
      *
      * @return static
      */
@@ -364,7 +341,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
         // This method just provides a convenient way for us to generate fresh model
         // instances of this current model. It is particularly useful during the
         // hydration of new objects via the Eloquent query builder instances.
-        $model = new static((array)$attributes);
+        $model = new static((array) $attributes);
 
         $model->exists = $exists;
 
@@ -375,8 +352,6 @@ abstract class Model implements ArrayAccess, JsonSerializable
 
     /**
      * Create a collection of models from plain arrays.
-     *
-     * @param  array  $items
      *
      * @return \Illuminate\Support\Collection
      */
@@ -397,8 +372,6 @@ abstract class Model implements ArrayAccess, JsonSerializable
     /**
      * Create a new Eloquent Collection instance.
      *
-     * @param  array  $models
-     *
      * @return \Illuminate\Support\Collection
      */
     public function newCollection(array $models = [])
@@ -409,8 +382,8 @@ abstract class Model implements ArrayAccess, JsonSerializable
     /**
      * Create a new model instance that is existing.
      *
-     * @param  array  $attributes
-     * @param  string|null  $connection
+     * @param array       $attributes
+     * @param string|null $connection
      *
      * @return static
      */
@@ -418,7 +391,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
     {
         $model = $this->newInstance([], true);
 
-        $model->setRawAttributes((array)$attributes, true);
+        $model->setRawAttributes((array) $attributes, true);
 
         $model->fireModelEvent('retrieved', false);
 
@@ -448,7 +421,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
     /**
      * Get the value for a given offset.
      *
-     * @param  string  $offset
+     * @param string $offset
      *
      * @return mixed
      */
@@ -460,10 +433,8 @@ abstract class Model implements ArrayAccess, JsonSerializable
     /**
      * Set the value at the given offset.
      *
-     * @param  string  $offset
-     * @param  mixed  $value
-     *
-     * @return void
+     * @param string $offset
+     * @param mixed  $value
      */
     public function offsetSet($offset, $value)
     {
@@ -473,7 +444,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
     /**
      * Determine if an attribute exists on the model.
      *
-     * @param  string  $key
+     * @param string $key
      *
      * @return bool
      */
@@ -485,13 +456,13 @@ abstract class Model implements ArrayAccess, JsonSerializable
     /**
      * Determine if the given offset exists.
      *
-     * @param  string  $offset
+     * @param string $offset
      *
      * @return bool
      */
     public function offsetExists($offset)
     {
-        return ! is_null($this->getAttribute($offset));
+        return !is_null($this->getAttribute($offset));
     }
 
     /**
@@ -512,7 +483,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
     /**
      * Dynamically retrieve attributes on the model.
      *
-     * @param  string  $key
+     * @param string $key
      *
      * @return mixed
      */
@@ -524,10 +495,8 @@ abstract class Model implements ArrayAccess, JsonSerializable
     /**
      * Dynamically set attributes on the model.
      *
-     * @param  string  $key
-     * @param  mixed  $value
-     *
-     * @return void
+     * @param string $key
+     * @param mixed  $value
      */
     public function __set($key, $value)
     {
@@ -537,9 +506,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
     /**
      * Unset an attribute on the model.
      *
-     * @param  string  $key
-     *
-     * @return void
+     * @param string $key
      */
     public function __unset($key)
     {
@@ -549,9 +516,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
     /**
      * Unset the value at the given offset.
      *
-     * @param  string  $offset
-     *
-     * @return void
+     * @param string $offset
      */
     public function offsetUnset($offset)
     {
@@ -571,11 +536,11 @@ abstract class Model implements ArrayAccess, JsonSerializable
     /**
      * Convert the model instance to JSON.
      *
-     * @param  int  $options
-     *
-     * @return string
+     * @param int $options
      *
      * @throws \Illuminate\Database\Eloquent\JsonEncodingException
+     *
+     * @return string
      */
     public function toJson($options = 0)
     {
@@ -602,8 +567,6 @@ abstract class Model implements ArrayAccess, JsonSerializable
 
     /**
      * Save the model to the database.
-     *
-     * @param  array  $options
      *
      * @return bool
      */
@@ -656,7 +619,6 @@ abstract class Model implements ArrayAccess, JsonSerializable
             return false;
         }
 
-
         // Once we have run the update operation, we will fire the "updated" event for
         // this model instance. This will allow developers to hook into these after
         // models are updated, giving them a chance to do any special processing.
@@ -707,10 +669,6 @@ abstract class Model implements ArrayAccess, JsonSerializable
 
     /**
      * Perform any actions that are necessary after the model is saved.
-     *
-     * @param  array  $options
-     *
-     * @return void
      */
     protected function finishSave(array $options)
     {
@@ -725,8 +683,6 @@ abstract class Model implements ArrayAccess, JsonSerializable
 
     /**
      * Touch the owning relations of the model.
-     *
-     * @return void
      */
     public function touchOwners()
     {
@@ -747,9 +703,9 @@ abstract class Model implements ArrayAccess, JsonSerializable
     /**
      * Delete the model from the database.
      *
-     * @return bool|null
-     *
      * @throws \Exception
+     *
+     * @return bool|null
      */
     public function delete()
     {
@@ -762,7 +718,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
         // If the model doesn't exist, there is nothing to delete so we'll just return
         // immediately and not do anything else. Otherwise, we will continue with a
         // deletion process on the model, firing the proper events, and so forth.
-        if ( ! $this->exists) {
+        if (!$this->exists) {
             return;
         }
 
@@ -778,7 +734,6 @@ abstract class Model implements ArrayAccess, JsonSerializable
         $this->getApi()->delete($this->getAttribute($this->getKeyName()));
         $this->exists = false;
 
-
         // Once the model has been deleted, we will fire off the deleted event so that
         // the developers may hook into post-delete operations. We will then return
         // a boolean true as the delete is presumably successful on the database.
@@ -788,9 +743,9 @@ abstract class Model implements ArrayAccess, JsonSerializable
     }
 
     /**
-     * @param  string|array  $column
-     * @param  null  $operator
-     * @param  null  $value
+     * @param array|string $column
+     * @param null         $operator
+     * @param null         $value
      */
     public function where($column, $value = null)
     {
@@ -808,7 +763,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
     /**
      * Determine if the given relation is loaded.
      *
-     * @param  string  $key
+     * @param string $key
      *
      * @return bool
      */
@@ -819,8 +774,6 @@ abstract class Model implements ArrayAccess, JsonSerializable
 
     /**
      * Initialize any initializable traits on the model.
-     *
-     * @return void
      */
     protected function initializeTraits()
     {
@@ -828,6 +781,4 @@ abstract class Model implements ArrayAccess, JsonSerializable
             $this->{$method}();
         }
     }
-
-
 }

@@ -4,7 +4,6 @@ namespace Udemy\Laravel;
 
 interface ConnectionInterface
 {
-
     public function setConfig(array $config = []);
 
     public function config($key = null);

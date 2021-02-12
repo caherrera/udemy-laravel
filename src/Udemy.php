@@ -67,7 +67,7 @@ class Udemy implements ConnectionInterface
 
     public function addHeader(string $header, string $value)
     {
-        if ( ! isset($this->requestHeaders[$header])) {
+        if (!isset($this->requestHeaders[$header])) {
             $this->requestHeaders[$header] = [];
         }
         $this->requestHeaders[$header][] = $value;
@@ -90,7 +90,7 @@ class Udemy implements ConnectionInterface
     }
 
     /**
-     * @param  string  $client
+     * @param string $client
      *
      * @return Udemy
      */
@@ -110,7 +110,7 @@ class Udemy implements ConnectionInterface
     }
 
     /**
-     * @param  mixed  $secret
+     * @param mixed $secret
      *
      * @return Udemy
      */
@@ -172,7 +172,7 @@ class Udemy implements ConnectionInterface
     }
 
     /**
-     * @param  array|int|string  $config
+     * @param array|int|string $config
      *
      * @return Udemy
      */

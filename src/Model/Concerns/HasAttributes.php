@@ -19,8 +19,8 @@ trait HasAttributes
     /**
      * Set a given attribute on the model.
      *
-     * @param  string  $key
-     * @param  mixed  $value
+     * @param string $key
+     * @param mixed  $value
      *
      * @return mixed
      */
@@ -46,7 +46,7 @@ trait HasAttributes
             return $this;
         }
 
-        if ($this->isJsonCastable($key) && ! is_null($value)) {
+        if ($this->isJsonCastable($key) && !is_null($value)) {
             $value = $this->castAttributeAsJson($key, $value);
         }
 

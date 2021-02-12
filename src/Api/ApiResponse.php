@@ -1,10 +1,9 @@
 <?php
 
 namespace Udemy\Laravel\Api;
+
 /**
- * Class Api
- *
- * @package Udemy\Laravel\Api
+ * Class Api.
  */
 class ApiResponse
 {

@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Api
@@ -10,10 +9,10 @@ return [
     | This is host api for udemy
     |
     */
-    'organization' =>[
-        'domain' => env('UDEMY_ORGANIZATION_DOMAIN', ''),
-        'api_path' => env('UDEMY_ORGANIZATION_API_PATH',''),
-        'id' => env('UDEMY_ORGANIZATION_ID', '')
+    'organization' => [
+        'domain'   => env('UDEMY_ORGANIZATION_DOMAIN', ''),
+        'api_path' => env('UDEMY_ORGANIZATION_API_PATH', ''),
+        'id'       => env('UDEMY_ORGANIZATION_ID', ''),
     ],
 
     /*
@@ -93,5 +92,5 @@ return [
     */
     'cache'   => [
         'timeout' => env('UDEMY_CACHE_TIMEOUT', 3600),
-    ]
+    ],
 ];
