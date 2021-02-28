@@ -34,7 +34,7 @@ return [
             'list'   => ['method' => 'GET', 'endpoint' => env('UDEMY_PATH_USER_COURSE_ACTIVITY', 'analytics/user-course-activity/')],
         ],
         'user' => [
-            'list' => ['method' => 'GET', 'endpoint' => env('UDEMY_PATH_USERS_ACTIVITY', 'users/list')],
+            'list' => ['method' => 'GET', 'endpoint' => env('UDEMY_PATH_USER_LIST', 'users/list')],
         ],
     ],
 
