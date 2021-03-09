@@ -9,19 +9,6 @@ use Udemy\Laravel\Udemy;
 
 class UserProgressTest extends TestCase
 {
-
-    public function testGetOne()
-    {
-        $config = Config::get('udemy');
-        $udemy = new Udemy($config);
-        $user_progress = $udemy->user_progress();
-        $this->assertInstanceOf(UserProgress::class, $user_progress);
-
-        $response = $user_progress->get('carlos.herreracaceres@cencosud.cl');
-
-        $this->assertNotEmpty($response);
-    }
-
     public function testGet()
     {
         $config = Config::get('udemy');

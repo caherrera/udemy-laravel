@@ -4,14 +4,16 @@ namespace Udemy\Laravel;
 
 use Udemy\Laravel\Api\Course;
 use Udemy\Laravel\Api\User;
-use Udemy\Laravel\Api\UserProgress;
+use Udemy\Laravel\Api\UserActivity;
 use Udemy\Laravel\Api\UserCourse;
+use Udemy\Laravel\Api\UserProgress;
 
 class Udemy implements ConnectionInterface
 {
     const HEADER_APIKEY = 'authorization';
     protected $courses;
     protected $users;
+    protected $user_activities;
     protected $user_progress;
     protected $user_courses;
     /**firstOrCreate
@@ -145,7 +147,7 @@ class Udemy implements ConnectionInterface
     }
 
     /**
-     * @return UserProgress
+     * @return UserActivity
      */
     public function users()
     {
@@ -154,6 +156,18 @@ class Udemy implements ConnectionInterface
         }
 
         return $this->users;
+    }
+
+    /**
+     * @return UserActivity
+     */
+    public function user_activities()
+    {
+        if ($this->user_activities === null) {
+            $this->user_activities = new UserActivity($this);
+        }
+
+        return $this->user_activities;
     }
 
     /**

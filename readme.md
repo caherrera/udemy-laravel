@@ -58,7 +58,7 @@ Udemy::domains()->all();
 If you prefer to use models over facades like me, then you can easily inject the manager like so:
 
 ```php
-use Udemy\Laravel\Model\UserProgress;
+use Udemy\Laravel\Model\UserActivity;
 
 class Foo
 {
@@ -66,12 +66,12 @@ class Foo
 
     public function __construct()
     {
-        $this->user_progress = new UserProgress();
+        $this->user_activity = new UserActivity();
     }
 
     public function all()
     {
-        return $this->user_progress->all();
+        return $this->user_activity->all();
     }
 }
 

@@ -27,8 +27,11 @@ return [
         'course' => [
             'list' => ['method' => 'GET', 'endpoint' => env('UDEMY_PATH_COURSE_LIST', 'courses/list')],
         ],
-        'userprogress' => [
+        'useractivity' => [
             'list' => ['method' => 'GET', 'endpoint' => env('UDEMY_PATH_USERS_ACTIVITY', 'analytics/user-activity/')],
+        ],
+        'userprogress' => [
+            'list' => ['method' => 'GET', 'endpoint' => env('UDEMY_PATH_USERS_ACTIVITY', 'analytics/user-progress/')],
         ],
         'usercourse' => [
             'list'   => ['method' => 'GET', 'endpoint' => env('UDEMY_PATH_USER_COURSE_ACTIVITY', 'analytics/user-course-activity/')],

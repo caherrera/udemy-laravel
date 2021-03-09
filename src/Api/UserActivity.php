@@ -4,31 +4,29 @@ namespace Udemy\Laravel\Api;
 
 use Illuminate\Support\Str;
 
-class UserProgress extends Api
+class UserActivity extends Api
 {
     const properties = [
-        'user_email',
-        'course_id',
-        'course_title',
-        'item_title',
         'user_name',
         'user_surname',
+        'user_email',
         'user_role',
+        'user_external_id',
         'user_is_deactivated',
-        'item_type',
-        'item_id',
-        'item_start_time',
-        'item_completion_time',
-        'item_views',
-        'item_completion_ratio',
-        'item_final_result',
-        'item_marked_complete',
-        'course_category'
+        'num_new_enrolled_courses',
+        'num_new_assigned_courses',
+        'num_new_started_courses',
+        'num_completed_courses',
+        'num_completed_lectures',
+        'num_completed_quizzes',
+        'num_video_consumed_minutes',
+        'num_web_visited_days',
+        'last_date_visit',
     ];
 
     public function get($id = null)
     {
-        return $this->processRequest('get', $this->prepareGetUrl());
+        return $this->processRequest('get', $this->prepareGetUrl(), $id ? ['user_email' => $id] : []);
     }
 
     public function prepareGetUrl($id = null)
